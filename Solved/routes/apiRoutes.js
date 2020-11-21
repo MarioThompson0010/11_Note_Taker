@@ -7,8 +7,8 @@ var router = require('express').Router();
 var noteData = require('../data/note');
 const fs = require("fs");
 const path = require("path");
-let notetaker = "";
-let notes = [];
+//let notetaker = "";
+//let notes = [];
 
 const OUTPUT_DIR = path.resolve(__dirname, "output"); // get full path to directory output
 const outputPath = path.join(OUTPUT_DIR, "../../db/db.json"); // append team.html to directory output folder
@@ -28,7 +28,7 @@ router
     const id = req.params.id;
     fs.readFile("../db/db.json", (error, data) => {
       error ? console.error(error) : console.log(data);
-      notes = JSON.parse(data);
+      const notes = JSON.parse(data);
       const tointid = parseInt(id);
 
       const findIndex = notes.findIndex(element => {
@@ -43,24 +43,22 @@ router
       }
 
       notes.splice(findIndex, 1);
-      //writeAwesomeNotes(notes)
       fs.writeFileSync(outputPath, JSON.stringify(notes));
-      //.then(() => {
-      const mynotes = fs.readFileSync(outputPath);
-      const jsonnedNotes = JSON.parse(mynotes);
-      res.json(jsonnedNotes);
+      const myNotes = fs.readFileSync(outputPath);
+      const readableNotes = JSON.parse(myNotes);
+      res.json(readableNotes);
     }
     );
   }
   );
 
-  // "../db/db.json"
+// "../db/db.json"
 router
   .route('/notes')
   .get((_req, res) => {
     const deb = 0;
     fs.readFile(outputPath, (error, data) => {
-      if (error){
+      if (error) {
         console.error(error);
       }
 
@@ -72,81 +70,72 @@ router
   .post((req, res) => {
 
     let newNote = req.body;
-    //const notes = JSON.parse( fs.readFileSync(outputPath));
-    //notes.push(newNote);
+    let realNewNote = noteData;
     const notes = JSON.parse(fs.readFileSync(outputPath));
-    let lastelement = notes[notes.length - 1];
-    //const lastid = parseInt( lastelement.id);
-    lastelement.id++;
-    newNote.id = lastid;
-    fs.writeFile(outputPath, JSON.stringify(newNote), (err) => {
-      err ? console.error(err) :  
-      res.json(newNote);
+
+    const lastelement = notes.length > 0 ? notes[notes.length -1] : 0;
+    
+    let lastelementIndex = lastelement.id + 1;
+
+    realNewNote.id = lastelementIndex;
+    realNewNote.title = newNote.title;
+    realNewNote.text = newNote.text;
+
+    notes.push(realNewNote);
+    fs.writeFile(outputPath, JSON.stringify(notes), (err) => {
+      err ? console.error(err) :
+        res.json(realNewNote);
     });
-    // noteData.push(temp);
-    // const temp3 = JSON.stringify(temp);
-    // //const parsed = JSON.parse(req);
-    // fs.writeFile(outputPath, JSON.stringify(noteData, null, '\t'), (err) => {
-    //   err ? console.log(err) : console.log('Success!');
-
-    //   fs.readFile(outputPath, (error, data) => {
-    //     error ? console.error(error) : console.log(data);
-    //     const notes = JSON.parse(data);
-    //     res.json(notes);
-    //   }
-    //   );
-    // }
-    // );
   });
 
-function readTheFile() {
+// function readTheFile() {
 
-  fs.readFile(outputPath, (error, data) => {
-    error ? console.error(error) : console.log(data);
-    const notes = JSON.parse(data);
-    res.json(notes);
-  }
-  );
-}
+//   fs.readFile(outputPath, (error, data) => {
+//     error ? console.error(error) : console.log(data);
+//     const notes = JSON.parse(data);
+//     res.json(notes);
+//   }
+//   );
+// }
 
-const readAwesomeNotes = () => {
+// const readAwesomeNotes = () => {
 
-  fs.readFileSync(outputPath, (error, data) => {
-    error ? console.error(error) : console.log(data);
-    const notes = JSON.parse(data);
-    return notes;
-    //res.json(notes);
-  }
-  );
+//   fs.readFileSync(outputPath, (error, data) => {
+//     error ? console.error(error) : console.log(data);
+//     const notes = JSON.parse(data);
+//     return notes;
+//     //res.json(notes);
+//   }
+//   );
 
-}
-const writeAwesomeNotes = (note) => {
-
-
-  fs.writeFileSync(outputPath, JSON.stringify(note, null, '\t'), (err) => {
-    err ? console.log(err) : console.log('Success!');
+// }
+// const writeAwesomeNotes = (note) => {
 
 
-    // $.ajax({
-    //   url: "/api/notes",
-    //   data: note,
-    //   method: "POST",
-    // });
-  });
-
-}
+//   fs.writeFileSync(outputPath, JSON.stringify(note, null, '\t'), (err) => {
+//     err ? console.log(err) : console.log('Success!');
 
 
-function writeToFile(notetaker) {
+//     // $.ajax({
+//     //   url: "/api/notes",
+//     //   data: note,
+//     //   method: "POST",
+//     // });
+//   });
 
-  fs.writeFile(outputPath, JSON.stringify(notetaker, null, '\t'), (err) => {
-    err ? console.log(err) : console.log('Success!');
+// }
 
-    // fs.writeFile(fileName, notetaker, (err) =>
-    //   err ? console.log(err) : console.log('Success!')
-    // );
-  });
-}
+
+// function writeToFile(notetaker) {
+
+//   fs.writeFile(outputPath, JSON.stringify(notetaker, null, '\t'), (err) => {
+//     err ? console.log(err) : console.log('Success!');
+
+//     // fs.writeFile(fileName, notetaker, (err) =>
+//     //   err ? console.log(err) : console.log('Success!')
+//     // );
+//   });
+// }
 
 
 

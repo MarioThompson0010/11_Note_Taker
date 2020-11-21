@@ -5,14 +5,14 @@
 // But you could have it be an empty array as well.
 // ===============================================================================
 
-var noteArray = [
+var note = 
     {
       title : "my note",
       text: "my now",
       id: 1
-    },
-  ];
+    };
+  
   
   // Note how we export the array. This makes it accessible to other files using require.
-  module.exports = noteArray;
+  module.exports = note;
   

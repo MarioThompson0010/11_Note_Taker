@@ -1,13 +1,1 @@
-[
-	{
-		"title": "hey",
-		"notes": "my note",
-		"id": 1
-	},
-	{
-		"title": "hey2",
-		"notes": "my note2",
-		"id": 2
-	}
-
-]
+[{"title":"hey","text":"my note","id":1},{"title":"hey2","text":"my note2","id":2},{"title":"hey4","text":"my note4","id":3}]
