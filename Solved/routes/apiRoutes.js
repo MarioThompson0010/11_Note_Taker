@@ -22,11 +22,12 @@ const outputPath = path.join(OUTPUT_DIR, "../../db/db.json"); // append team.htm
 // In each of the below cases when a user visits a link
 // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
 // ---------------------------------------------------------------------------
+// "../db/db.json"
 router
   .route('/notes/:id')
   .delete((req, res) => {
     const id = req.params.id;
-    fs.readFile("../db/db.json", (error, data) => {
+    fs.readFile(outputPath, (error, data) => {
       error ? console.error(error) : console.log(data);
       const notes = JSON.parse(data);
       const tointid = parseInt(id);
@@ -34,13 +35,6 @@ router
       const findIndex = notes.findIndex(element => {
         return (element.id === tointid);
       });
-
-      let found = null;
-      if (findIndex !== -1) {
-        found = notes.find(element => {
-          return (element.id === tointid);
-        });
-      }
 
       notes.splice(findIndex, 1);
       fs.writeFileSync(outputPath, JSON.stringify(notes));
@@ -82,75 +76,11 @@ router
     realNewNote.text = newNote.text;
 
     notes.push(realNewNote);
+
     fs.writeFile(outputPath, JSON.stringify(notes), (err) => {
       err ? console.error(err) :
         res.json(realNewNote);
     });
   });
-
-// function readTheFile() {
-
-//   fs.readFile(outputPath, (error, data) => {
-//     error ? console.error(error) : console.log(data);
-//     const notes = JSON.parse(data);
-//     res.json(notes);
-//   }
-//   );
-// }
-
-// const readAwesomeNotes = () => {
-
-//   fs.readFileSync(outputPath, (error, data) => {
-//     error ? console.error(error) : console.log(data);
-//     const notes = JSON.parse(data);
-//     return notes;
-//     //res.json(notes);
-//   }
-//   );
-
-// }
-// const writeAwesomeNotes = (note) => {
-
-
-//   fs.writeFileSync(outputPath, JSON.stringify(note, null, '\t'), (err) => {
-//     err ? console.log(err) : console.log('Success!');
-
-
-//     // $.ajax({
-//     //   url: "/api/notes",
-//     //   data: note,
-//     //   method: "POST",
-//     // });
-//   });
-
-// }
-
-
-// function writeToFile(notetaker) {
-
-//   fs.writeFile(outputPath, JSON.stringify(notetaker, null, '\t'), (err) => {
-//     err ? console.log(err) : console.log('Success!');
-
-//     // fs.writeFile(fileName, notetaker, (err) =>
-//     //   err ? console.log(err) : console.log('Success!')
-//     // );
-//   });
-// }
-
-
-
-// return fs.readFile(__dirname + filePath, function (err, data) {
-//   if (err) throw err;
-//   res.writeHead(200, { "Content-Type": "text/html" });
-//   res.end(data);
-// });
-
-
-// function renderHTML(filePath, res) {
-//       fs.writeFile(filename, JSON.stringify(data, null, '\t'), (err) => {
-//         err ? console.log(err) : console.log('Success!');
-//       });
-//     }
-
 
 module.exports = router;
