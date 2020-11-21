@@ -28,7 +28,7 @@ router
   .delete((req, res) => {
     const id = req.params.id;
     fs.readFile(outputPath, (error, data) => {
-      error ? console.error(error) : console.log(data);
+      error ? console.error(error) : console.log("Success!");
       const notes = JSON.parse(data);
       const tointid = parseInt(id);
 
@@ -67,7 +67,7 @@ router
     let realNewNote = noteData;
     const notes = JSON.parse(fs.readFileSync(outputPath));
 
-    const lastelement = notes.length > 0 ? notes[notes.length -1] : 0;
+    const lastelement = notes.length > 0 ? notes[notes.length -1] : noteData;
     
     let lastelementIndex = lastelement.id + 1;
 

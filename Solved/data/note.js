@@ -9,7 +9,7 @@ var note =
     {
       title : "my note",
       text: "my now",
-      id: 1
+      id: 0
     };
   
   
