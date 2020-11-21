@@ -7,8 +7,6 @@ var router = require('express').Router();
 var noteData = require('../data/note');
 const fs = require("fs");
 const path = require("path");
-//let notetaker = "";
-//let notes = [];
 
 const OUTPUT_DIR = path.resolve(__dirname, "output"); // get full path to directory output
 const outputPath = path.join(OUTPUT_DIR, "../../db/db.json"); // append team.html to directory output folder
@@ -18,11 +16,8 @@ const outputPath = path.join(OUTPUT_DIR, "../../db/db.json"); // append team.htm
 // ROUTING
 // ===============================================================================
 // API GET Requests
-// Below code handles when users "visit" a page.
-// In each of the below cases when a user visits a link
-// (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
+// Below code handles when users select a function to perform
 // ---------------------------------------------------------------------------
-// "../db/db.json"
 router
   .route('/notes/:id')
   .delete((req, res) => {
@@ -46,7 +41,7 @@ router
   }
   );
 
-// "../db/db.json"
+  // non-delete functions of update and read
 router
   .route('/notes')
   .get((_req, res) => {
