@@ -4,6 +4,5 @@ const router = require('express').Router();
 
 router.use('/api', apiRoutes);
 router.use(htmlRoutes);
-//router.use(express.static("public"));
 
 module.exports = router;
