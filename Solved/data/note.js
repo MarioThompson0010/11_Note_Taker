@@ -7,7 +7,9 @@
 
 var noteArray = [
     {
-      note: 'my note',
+      title : "my note",
+      text: "my now",
+      id: 1
     },
   ];
   
