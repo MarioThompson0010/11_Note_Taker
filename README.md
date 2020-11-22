@@ -3,7 +3,7 @@
 ## Screenshots and Video:
 
 ![Home Page](https://github.com/MarioThompson0010/11_Note_Taker/blob/main/screenshots/Home_Page.PNG)
-![Screenshot 2](https://github.com/MarioThompson0010/10_Team_Generator/blob/main/Assets/MyTeamScreenshot.PNG)
+![Notes Page](https://github.com/MarioThompson0010/11_Note_Taker/blob/main/screenshots/Notes_Page.PNG)
 
 List of technologies used: npm, Javascript, Nodejs, Heroku, Express, routes
 
