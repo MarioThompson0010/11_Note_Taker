@@ -1,29 +1,34 @@
-# 10_Team_Generator
+# 11_Notes_Taker
 
-## Screenshots and Video:
-
+## Link to app and Screenshots:
+[Link to Note Taker](https://hidden-hollows-43738.herokuapp.com/)
 ![Home Page](https://github.com/MarioThompson0010/11_Note_Taker/blob/main/screenshots/Home_Page.PNG)
 ![Notes Page](https://github.com/MarioThompson0010/11_Note_Taker/blob/main/screenshots/Notes_Page.PNG)
 
-List of technologies used: npm, Javascript, Nodejs, Heroku, Express, routes
+List of technologies used: npm, Javascript, Nodejs, Heroku, Express, routes, full stack
 
-## Description:
+## Description: My first FULL STACK program 
 
-This program is back-end only, using a Node CLI.  It generates an html web page that a user can use to quickly find out who is on her team and some contact info.  The contact info associated with the employee depends on the type of employee employed.  The three types of employees are manager, engineer, and intern.  
+This program will record your notes.  The front-end was built already as boilerplate code, but I built a routed, back-end server that stored information in a file and returned it to the front-end.
 
-Each team has one manager.  The manager's information gets entered first.  Then, the engineers and interns get entered, in any order, and until the user selects the "Exit" option, in a list.  
+If you need help taking notes, this program is for you.  You simply click on the pencil icon in the right hand side to open up (if it's not already open) the screen controls that will allow you to create a note.  Once you have at least one character in the title and the text sections, the save changes icon appears; it enables you to save changes.  
 
-The program uses npm's Inquirer to find out information. The name, id, and email address are required to be entered for every employee.  Managers enter their office number, an intern enters her school.  An engineer enters her Github profile url.  All 3 types derive from the base class Employee.
+The data gets sent from the web browser all the way to the server.  The server stores the data in a text file (in json format).  
+
+The user may also delete a note.  Simply click the garbage can icon next to each note.  This deletes the note not only from memory, but also from the database.  
+
+The user may also display a note and its detail.  Simply click a row that's in a list of rows.  
 
 ## How to run the program:
 
-1) Open a terminal. 
-2) Type "node app.js" 
-3) Answer the questions
-4) When you're done, select "Exit"
-5) Go to the output folder, then open the html file
-6) View the html file in a browser
+1) Go to https://hidden-hollows-43738.herokuapp.com/
+2) Click on the Get Started button.
+3) Answer the questions.
+4) Put your cursor where it says Note Title.  Enter a title and a note.
+5) Click the save changes icon.
+6) Click on a row that has your title on it.
+7) Now delete it by clicking on the garbage can icon.
 
 ## How to test this app
 
-Type "npm run test" in the terminal.  It did pass, as you'll see in the video.
+Create a bunch of notes.  Delete them all.  See if you crash.
